@@ -56,6 +56,10 @@ textarea {
   color: var(--text);
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .container {
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;

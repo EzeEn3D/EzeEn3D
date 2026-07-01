@@ -2,17 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
-  Box,
   Calculator,
   Check,
-  Clock,
   Home,
   Mail,
   Menu,
-  PackageCheck,
   Sparkles,
   Utensils,
-  Wrench,
   X,
 } from "lucide-react";
 import "./styles.css";
@@ -24,7 +20,7 @@ const currencyData = {
     locale: "es-AR",
     rate: 1,
     defaults: {
-      filamentKg: 20000,
+      filamentKg: 24000,
       kwh: 140,
       spareParts: 15000,
       supplies: 0,
@@ -36,7 +32,7 @@ const currencyData = {
     locale: "en-US",
     rate: 1200,
     defaults: {
-      filamentKg: 16.67,
+      filamentKg: 20,
       kwh: 0.12,
       spareParts: 12.5,
       supplies: 0,
@@ -48,7 +44,7 @@ const currencyData = {
     locale: "de-DE",
     rate: 1300,
     defaults: {
-      filamentKg: 15.38,
+      filamentKg: 18.46,
       kwh: 0.11,
       spareParts: 11.54,
       supplies: 0,
@@ -69,51 +65,51 @@ const navItems = [
 const services = [
   {
     icon: Utensils,
-    title: "Accesorios de cocina",
-    text: "Organizadores de especias, separadores de cajones, soportes para tapas, ganchos para heladera y adaptadores para electrodomésticos.",
-    chip: "Materiales aptos para uso en cocina*",
+    title: "Cocina y orden",
+    text: "Separadores de cajones, porta esponjas, soportes para tapas, ganchos y piezas chicas pensadas para el espacio que tenés.",
+    chip: "Medidas a pedido",
   },
   {
     icon: Home,
-    title: "Orden y mantenimiento del hogar",
-    text: "Soportes para cables, colgadores, topes de puertas, adaptadores para mangueras, tapas y piezas que ya no se consiguen.",
-    chip: "Repuestos a medida",
+    title: "Repuestos simples",
+    text: "Tapas, clips, topes, adaptadores y piezas que se rompen o ya no se consiguen. Si hay muestra o foto, mejor.",
+    chip: "Se revisa antes de imprimir",
   },
   {
     icon: Sparkles,
-    title: "Regalos y piezas personalizadas",
-    text: "Nombres, logos, bases para trofeos, miniaturas y detalles únicos para sorprender en cumpleaños, casamientos y eventos.",
-    chip: "Diseño a partir de tu idea",
+    title: "Personalizados",
+    text: "Nombres, carteles, bases, llaveros y detalles para regalos o eventos. Te paso opciones de tamaño y color antes de hacerlo.",
+    chip: "Colores según stock",
   },
 ];
 
 const useCases = [
   {
-    title: "Soportes de cocina que se adaptan a tu espacio",
-    text: "Desde porta-esponjas que encajan perfecto en tu pileta hasta soportes para utensilios pensados para tu mesada.",
+    title: "Algo no encaja en la cocina",
+    text: "Un porta esponja para esa pileta, una traba para una tapa o un separador de cajón con una medida rara.",
   },
   {
-    title: "Repuestos que dejaron de fabricarse",
-    text: "Piezas de heladeras, lavarropas, cortinas o muebles que ya no se consiguen. Las medimos, las modelamos y las volvés a usar.",
+    title: "Se rompió una pieza chica",
+    text: "Clips de cortina, patitas, perillas, tapas, guías o adaptadores. La idea es evitar cambiar todo por una pieza mínima.",
   },
   {
-    title: "Detalles personalizados para tu casa",
-    text: "Nombres en 3D, carteles, soportes para auriculares, docks de carga y pequeños detalles que suman mucho al día a día.",
+    title: "Querés algo con nombre o logo",
+    text: "Carteles, llaveros, bases, nombres en 3D o detalles para regalar. Se arma simple, sin vueltas raras.",
   },
 ];
 
 const processSteps = [
   {
-    title: "Nos contás tu idea",
-    text: "Puede ser una foto, un dibujo rápido o un mensaje describiendo el problema: necesito un soporte para...",
+    title: "Me mandás la idea",
+    text: "Una foto, medidas aproximadas o un audio contando qué pieza necesitás. No hace falta tener un plano.",
   },
   {
-    title: "Te proponemos una solución",
-    text: "Definimos diseño, tamaño, material y color. Te pasamos precio estimado y tiempo de entrega antes de imprimir.",
+    title: "Reviso si conviene imprimirla",
+    text: "Vemos tamaño, material, color y si la pieza va a aguantar el uso. Si no tiene sentido, te lo digo antes.",
   },
   {
-    title: "Imprimimos y entregamos",
-    text: "Producimos la pieza en 3D, la revisamos y coordinamos envío o retiro. Para piezas simples, solemos estar listos en 48-72 hs.",
+    title: "Imprimo y coordinamos",
+    text: "La pieza se imprime, se revisa y después arreglamos retiro o envío. Las piezas simples suelen salir en 48-72 hs.",
   },
 ];
 
@@ -147,8 +143,10 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currency, setCurrency] = useState("ARS");
   const [calculationCount, setCalculationCount] = useState(0);
+  const [contactResult, setContactResult] = useState("");
+  const [isContactSubmitting, setIsContactSubmitting] = useState(false);
   const [form, setForm] = useState({
-    filamentKg: 20000,
+    filamentKg: 24000,
     kwh: 140,
     watts: 120,
     machineHours: 4300,
@@ -162,6 +160,7 @@ function App() {
   });
 
   const currencyConfig = currencyData[currency];
+  const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
   const visibleForm = useMemo(
     () =>
       moneyFields.reduce(
@@ -198,13 +197,12 @@ function App() {
       (materialCost + electricityCost + machineWear) *
       (toNumber(form.errorMargin) / 100);
     const costLightAndMaterial = materialCost + electricityCost;
+    const costBeforeSupplies =
+      materialCost + electricityCost + machineWear + errorMarginCost;
     const totalCost =
-      materialCost +
-      electricityCost +
-      machineWear +
-      errorMarginCost +
-      money("supplies");
-    const totalToCharge = totalCost * toNumber(form.profitMultiplier);
+      costBeforeSupplies + money("supplies");
+    const totalToCharge =
+      costBeforeSupplies * toNumber(form.profitMultiplier) + money("supplies");
 
     return {
       materialCost,
@@ -261,13 +259,48 @@ function App() {
       maximumFractionDigits: 2,
     }).format(value)}`;
 
+  const handleContactSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!web3FormsAccessKey) {
+      setContactResult("Falta configurar la clave de envío del formulario.");
+      return;
+    }
+
+    setIsContactSubmitting(true);
+    setContactResult("Enviando consulta...");
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", web3FormsAccessKey);
+    formData.append("subject", "Nueva consulta desde Eze en 3D");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setContactResult("Consulta enviada correctamente. Te respondemos pronto.");
+        event.currentTarget.reset();
+      } else {
+        setContactResult("No se pudo enviar la consulta. Probá de nuevo.");
+      }
+    } catch {
+      setContactResult("No se pudo enviar la consulta. Revisá tu conexión.");
+    } finally {
+      setIsContactSubmitting(false);
+    }
+  };
+
   return (
     <>
       <header className="site-header">
         <div className="container nav">
           <a className="brand" href="#inicio" aria-label="Eze en 3D inicio">
             <span className="brand-mark" aria-hidden="true">
-              <Box size={19} strokeWidth={2.4} />
+              <img src="/logo.png" alt="" />
             </span>
             <span>Eze en 3D</span>
           </a>
@@ -308,62 +341,32 @@ function App() {
         <section className="hero section-band">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="badge">
-                <span className="badge-dot" />
-                Impresión 3D bajo demanda para tu día a día
-              </div>
-              <p className="eyebrow">Imprimí ideas, no solo objetos</p>
+              <p className="eyebrow">Eze en 3D</p>
               <h1>
-                Soluciones 3D para <span>casa, cocina y organización</span>
+                Piezas impresas en 3D para casa y repuestos chicos
               </h1>
               <p className="lead">
-                Diseñamos y fabricamos piezas en 3D para que tu hogar sea más
-                práctico, ordenado y único: desde accesorios de cocina hasta
-                soportes, organizadores y piezas personalizadas.
+                Trabajo por pedido: soportes, adaptadores, organizadores y
+                personalizados. Si tenés una pieza rota o una idea dando vueltas,
+                mandame una foto con medidas y vemos si conviene imprimirla.
               </p>
               <div className="hero-actions">
                 <a className="button button-primary" href="#contacto">
-                  Enviar mi idea
+                  Mandar consulta
                   <ArrowRight size={17} />
                 </a>
                 <a className="button button-secondary" href="#calculadora">
-                  Calcular impresión
+                  Usar calculadora
                   <Calculator size={17} />
                 </a>
               </div>
               <div className="hero-meta" aria-label="Datos del servicio">
                 <span>
-                  <strong>48 hs</strong> aprox. para prototipos simples
+                  <strong>48-72 hs</strong> para piezas simples
                 </span>
                 <span>
-                  <strong>Pedidos pequeños y grandes</strong> sin mínimo
+                  <strong>PLA y PETG</strong> según uso y stock
                 </span>
-              </div>
-            </div>
-
-            <div className="hero-visual" aria-label="Muestra de piezas 3D">
-              <div className="visual-toolbar">
-                <span>Plano de pieza</span>
-                <span>PLA+ / PETG</span>
-              </div>
-              <div className="object-board">
-                <div className="object-card object-card-large">
-                  <div className="printed-object organizer" />
-                  <span>Organizador</span>
-                </div>
-                <div className="object-card">
-                  <div className="printed-object hook" />
-                  <span>Soporte</span>
-                </div>
-                <div className="object-card">
-                  <div className="printed-object cap" />
-                  <span>Repuesto</span>
-                </div>
-              </div>
-              <div className="hero-tags">
-                <span>Cocina y hogar</span>
-                <span>Repuestos difíciles</span>
-                <span>Regalos personalizados</span>
               </div>
             </div>
           </div>
@@ -372,9 +375,9 @@ function App() {
         <section id="servicios" className="section-block">
           <div className="container">
             <SectionHeading
-              kicker="Qué podemos imprimir para vos"
-              title="Servicios pensados para la vida cotidiana"
-              subtitle="Si lo podés imaginar, podemos diseñarlo y llevarlo a tu mesa, tu cocina o tu escritorio."
+              kicker="Qué suelo imprimir"
+              title="Piezas útiles, no catálogo infinito"
+              subtitle="Trabajo mejor cuando hay una necesidad concreta: una medida rara, un repuesto que falta o un accesorio que no encaja."
             />
 
             <div className="features-grid">
@@ -396,12 +399,11 @@ function App() {
           <div className="container">
             <div className="calculator-intro">
               <div>
-                <p className="eyebrow">Calculadora de costos de impresión 3D</p>
-                <h2>Calculá material, luz, desgaste y ganancia en segundos</h2>
+                <p className="eyebrow">Calculadora de costos</p>
+                <h2>Sacá un precio base sin pelearte con una planilla</h2>
                 <p>
-                  Cargá los datos de la pieza y ajustá los gastos fijos. Los
-                  resultados se actualizan automáticamente para ayudarte a
-                  presupuestar con más criterio.
+                  Cargá material, horas, luz, desgaste e insumos. Sirve para
+                  presupuestar una impresión antes de pasar precio.
                 </p>
               </div>
               <div className="currency-switch" aria-label="Cambiar moneda">
@@ -553,11 +555,11 @@ function App() {
         <section id="proyectos" className="section-block">
           <div className="container usecases-grid">
             <div>
-              <p className="eyebrow">Ideas para inspirarte</p>
-              <h2>Aplicaciones reales en tu casa</h2>
+              <p className="eyebrow">Pedidos típicos</p>
+              <h2>Casos donde la impresión 3D viene bien</h2>
               <p className="section-copy">
-                No necesitás saber de diseño 3D. Nos contás el problema,
-                buscamos una solución simple y te la entregamos lista para usar.
+                No necesitás saber de diseño 3D. Mandás el problema y vemos una
+                forma simple de resolverlo.
               </p>
 
               <div className="usecases-list">
@@ -575,22 +577,6 @@ function App() {
               </div>
             </div>
 
-            <aside className="project-board" aria-label="Muestra de proyectos">
-              <div className="project-tabs">
-                <span>Impresiones reales</span>
-                <span>Varios colores</span>
-                <span>Texturas matte</span>
-              </div>
-              <div className="mini-gallery">
-                <ProjectTile title="Organizador de cajón" meta="Cocina / 2 días" />
-                <ProjectTile title="Soporte para especias" meta="Módulo apilable" />
-                <ProjectTile title="Clip para cortina" meta="Repuesto personalizado" />
-              </div>
-              <p>
-                Las muestras son representaciones de tipos de piezas. Podés
-                enviarnos fotos o medidas y trabajamos sobre eso.
-              </p>
-            </aside>
           </div>
         </section>
 
@@ -598,8 +584,8 @@ function App() {
           <div className="container">
             <SectionHeading
               kicker="Cómo trabajamos"
-              title="De tu idea al objeto en pocos pasos"
-              subtitle="Buscamos hacer el proceso simple y transparente, para que sepas siempre qué esperar."
+              title="Proceso corto y claro"
+              subtitle="La idea es no marearte: vemos si se puede hacer, acordamos precio y recién ahí se imprime."
             />
             <div className="process-grid">
               {processSteps.map((step, index) => (
@@ -619,8 +605,8 @@ function App() {
               <p className="eyebrow">Presupuesto sin compromiso</p>
               <h2>¿Tenés una idea o un problema para resolver?</h2>
               <p>
-                Mandanos tu consulta. Podemos partir de una foto, una referencia
-                de internet o simplemente de lo que te gustaría mejorar en tu casa.
+                Mandame tu consulta. Puede ser una foto, una referencia o una
+                explicación corta de la pieza que necesitás.
               </p>
               <div className="contact-list">
                 <span>
@@ -635,26 +621,36 @@ function App() {
               </div>
             </div>
 
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={handleContactSubmit}>
               <label>
                 Nombre
-                <input type="text" name="nombre" placeholder="Ej: Ana" />
+                <input type="text" name="name" placeholder="Ej: Ana" required />
               </label>
               <label>
                 Email
-                <input type="email" name="email" placeholder="tu@correo.com" />
+                <input type="email" name="email" placeholder="tu@correo.com" required />
               </label>
               <label>
                 Idea o problema a resolver
                 <textarea
-                  name="mensaje"
+                  name="message"
                   placeholder="Contanos qué te gustaría imprimir o qué problema querés resolver."
+                  required
                 />
               </label>
-              <button className="button button-primary full-width" type="submit">
+              <button
+                className="button button-primary full-width"
+                type="submit"
+                disabled={isContactSubmitting}
+              >
                 <Mail size={17} />
-                Enviar consulta
+                {isContactSubmitting ? "Enviando..." : "Enviar consulta"}
               </button>
+              {contactResult && (
+                <span className="form-status" role="status" aria-live="polite">
+                  {contactResult}
+                </span>
+              )}
               <p>
                 También podés escribirnos por WhatsApp o Instagram si preferís
                 mandar fotos directamente.
@@ -721,16 +717,6 @@ function ResultLine({ label, value, highlight = false }) {
       <span>{label}</span>
       <strong>{value}</strong>
     </div>
-  );
-}
-
-function ProjectTile({ title, meta }) {
-  return (
-    <article className="project-tile">
-      <div className="tile-visual" />
-      <h3>{title}</h3>
-      <span>{meta}</span>
-    </article>
   );
 }
 

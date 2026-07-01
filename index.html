@@ -1,16 +1,744 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Eze en 3D: impresiones 3D personalizadas para casa, cocina, organización, repuestos y regalos."
-    />
-    <title>Eze en 3D - Impresiones 3D personalizadas</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/App.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Eze en 3D: impresiones 3D personalizadas para casa, cocina, organización, repuestos y regalos." />
+  <title>Eze en 3D - Impresiones 3D personalizadas</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Eze en 3D" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Eze en 3D inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="./logo.png" alt="" />
+        </span>
+        <span>Eze en 3D</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#proyectos">Aplicaciones</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+        <a class="button button-ghost" href="#contacto">Pedir presupuesto</a>
+      </nav>
+
+      <button id="menu-button" class="icon-button menu-button" type="button" aria-label="Abrir menú"
+        aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+        <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.2" stroke-linecap="round" aria-hidden="true" hidden>
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6 6 18"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Menú móvil" hidden>
+      <a href="#servicios">Servicios</a>
+      <a href="#calculadora">Calculadora</a>
+      <a href="#proyectos">Aplicaciones</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero section-band">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Eze en 3D</p>
+          <h1>Piezas impresas en 3D para casa y repuestos chicos</h1>
+          <p class="lead">
+            Trabajo por pedido: soportes, adaptadores, organizadores y
+            personalizados. Si tenés una pieza rota o una idea dando vueltas,
+            mandame una foto con medidas y vemos si conviene imprimirla.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contacto">
+              Mandar consulta
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+            <a class="button button-secondary" href="#calculadora">
+              Usar calculadora
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                <path d="M8 7h8"></path>
+                <path d="M8 11h.01"></path>
+                <path d="M12 11h.01"></path>
+                <path d="M16 11h.01"></path>
+                <path d="M8 15h.01"></path>
+                <path d="M12 15h.01"></path>
+                <path d="M16 15h.01"></path>
+              </svg>
+            </a>
+          </div>
+          <div class="hero-meta" aria-label="Datos del servicio">
+            <span><strong>48-72 hs</strong> para piezas simples</span>
+            <span><strong>PLA y PETG</strong> según uso y stock</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="section-block">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Qué suelo imprimir</p>
+          <h2>Piezas útiles, no catálogo infinito</h2>
+          <p>
+            Trabajo mejor cuando hay una necesidad concreta: una medida rara,
+            un repuesto que falta o un accesorio que no encaja.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 3v7"></path>
+                <path d="M7 3v7"></path>
+                <path d="M4 10h3"></path>
+                <path d="M5.5 10v11"></path>
+                <path d="M17 3c-2 2-3 5-3 8h4v10"></path>
+              </svg>
+            </div>
+            <h3>Cocina y orden</h3>
+            <p>
+              Separadores de cajones, porta esponjas, soportes para tapas,
+              ganchos y piezas chicas pensadas para el espacio que tenés.
+            </p>
+            <span class="feature-chip">Medidas a pedido</span>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 11 9-8 9 8"></path>
+                <path d="M5 10v10h14V10"></path>
+                <path d="M10 20v-6h4v6"></path>
+              </svg>
+            </div>
+            <h3>Repuestos simples</h3>
+            <p>
+              Tapas, clips, topes, adaptadores y piezas que se rompen o ya no
+              se consiguen. Si hay muestra o foto, mejor.
+            </p>
+            <span class="feature-chip">Se revisa antes de imprimir</span>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3 1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z"></path>
+                <path d="m5 16 .8 1.8L8 18.5l-2.2.7L5 21l-.8-1.8-2.2-.7 2.2-.7L5 16Z"></path>
+              </svg>
+            </div>
+            <h3>Personalizados</h3>
+            <p>
+              Nombres, carteles, bases, llaveros y detalles para regalos o
+              eventos. Te paso opciones de tamaño y color antes de hacerlo.
+            </p>
+            <span class="feature-chip">Colores según stock</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculadora" class="calculator-section section-band">
+      <div class="container">
+        <div class="calculator-intro">
+          <div>
+            <p class="eyebrow">Calculadora de costos</p>
+            <h2>Sacá un precio base sin pelearte con una planilla</h2>
+            <p>
+              Cargá material, horas, luz, desgaste e insumos. Sirve para
+              presupuestar una impresión antes de pasar precio.
+            </p>
+          </div>
+          <div class="currency-switch" aria-label="Cambiar moneda">
+            <button class="active" type="button" data-currency="ARS">ARS $</button>
+            <button type="button" data-currency="USD">USD US$</button>
+            <button type="button" data-currency="EUR">EUR €</button>
+          </div>
+        </div>
+
+        <div class="calculator-shell">
+          <div class="calculator-forms">
+            <section class="form-panel" aria-label="Gastos fijos">
+              <h3>Gastos fijos</h3>
+              <label class="number-field">
+                <span>Precio KG (<span data-currency-label>ARS $</span>)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="filamentKg" data-money-field
+                  value="24000" />
+              </label>
+              <label class="number-field">
+                <span>Precio kWh (<span data-currency-label>ARS $</span>)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="kwh" data-money-field
+                  value="140" />
+              </label>
+              <label class="number-field">
+                <span>Consumo real por hora (W)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="watts" value="120" />
+              </label>
+              <label class="number-field">
+                <span>Desgaste máquina (horas)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="machineHours" value="4300" />
+              </label>
+              <label class="number-field">
+                <span>Precio repuestos (<span data-currency-label>ARS $</span>)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="spareParts" data-money-field
+                  value="15000" />
+              </label>
+              <label class="number-field">
+                <span>Margen de error (%)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="errorMargin" value="30" />
+              </label>
+            </section>
+
+            <section class="form-panel" aria-label="Pieza">
+              <h3>Pieza</h3>
+              <div class="field-row">
+                <label class="number-field">
+                  <span>Horas</span>
+                  <input type="number" inputmode="decimal" min="0" step="1" data-field="printHours" value="1" />
+                </label>
+                <label class="number-field">
+                  <span>Minutos</span>
+                  <input type="number" inputmode="decimal" min="0" max="59" step="1" data-field="printMinutes"
+                    value="0" />
+                </label>
+              </div>
+              <label class="number-field">
+                <span>Gramos de filamento</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="grams" value="100" />
+              </label>
+              <label class="number-field">
+                <span>Insumos (<span data-currency-label>ARS $</span>)</span>
+                <input type="number" inputmode="decimal" min="0" step="1" data-field="supplies" data-money-field
+                  value="0" />
+              </label>
+            </section>
+
+            <section class="form-panel" aria-label="Ganancia">
+              <h3>Ganancia</h3>
+              <label class="number-field">
+                <span>Margen de ganancia (multiplicador)</span>
+                <input type="number" inputmode="decimal" min="0" step="0.1" data-field="profitMultiplier" value="4" />
+              </label>
+              <p class="panel-note">
+                Referencia: minorista x4, mayorista x3 y llaveros x5.
+              </p>
+              <button id="calculate-button" class="button button-primary full-width calculate-button" type="button">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                  <path d="M8 7h8"></path>
+                  <path d="M8 11h.01"></path>
+                  <path d="M12 11h.01"></path>
+                  <path d="M16 11h.01"></path>
+                  <path d="M8 15h.01"></path>
+                  <path d="M12 15h.01"></path>
+                  <path d="M16 15h.01"></path>
+                </svg>
+                Calcular
+              </button>
+              <button id="reset-button" class="button button-secondary full-width" type="button">
+                Restaurar valores base
+              </button>
+            </section>
+          </div>
+
+          <aside id="calculator-results" class="result-panel" aria-live="polite" data-calculations="0">
+            <div class="result-heading">
+              <span>Resultados</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                <path d="M8 7h8"></path>
+                <path d="M8 11h.01"></path>
+                <path d="M12 11h.01"></path>
+                <path d="M16 11h.01"></path>
+                <path d="M8 15h.01"></path>
+                <path d="M12 15h.01"></path>
+                <path d="M16 15h.01"></path>
+              </svg>
+            </div>
+            <div class="result-line"><span>Precio material</span><strong id="result-materialCost"></strong></div>
+            <div class="result-line"><span>Precio luz</span><strong id="result-electricityCost"></strong></div>
+            <div class="result-line"><span>Desgaste máquina</span><strong id="result-machineWear"></strong></div>
+            <div class="result-line"><span>Margen de error</span><strong id="result-errorMarginCost"></strong></div>
+            <div class="result-line"><span>Insumos</span><strong id="result-supplies"></strong></div>
+            <div class="result-line"><span>Costo luz y material</span><strong id="result-costLightAndMaterial"></strong>
+            </div>
+            <div class="result-line highlight"><span>Costo total (con insumos)</span><strong
+                id="result-totalCost"></strong></div>
+            <div class="total-card">
+              <span>Total a cobrar</span>
+              <strong id="result-totalToCharge"></strong>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="section-block">
+      <div class="container usecases-grid">
+        <div>
+          <p class="eyebrow">Pedidos típicos</p>
+          <h2>Casos donde la impresión 3D viene bien</h2>
+          <p class="section-copy">
+            No necesitás saber de diseño 3D. Mandás el problema y vemos una
+            forma simple de resolverlo.
+          </p>
+
+          <div class="usecases-list">
+            <article class="usecase-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg>
+              </span>
+              <div>
+                <h3>Algo no encaja en la cocina</h3>
+                <p>
+                  Un porta esponja para esa pileta, una traba para una tapa o
+                  un separador de cajón con una medida rara.
+                </p>
+              </div>
+            </article>
+            <article class="usecase-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg>
+              </span>
+              <div>
+                <h3>Se rompió una pieza chica</h3>
+                <p>
+                  Clips de cortina, patitas, perillas, tapas, guías o
+                  adaptadores. La idea es evitar cambiar todo por una pieza
+                  mínima.
+                </p>
+              </div>
+            </article>
+            <article class="usecase-item">
+              <span class="check-icon" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 12 5 5L20 7"></path>
+                </svg>
+              </span>
+              <div>
+                <h3>Querés algo con nombre o logo</h3>
+                <p>
+                  Carteles, llaveros, bases, nombres en 3D o detalles para
+                  regalar. Se arma simple, sin vueltas raras.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso" class="section-block process-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Cómo trabajamos</p>
+          <h2>Proceso corto y claro</h2>
+          <p>
+            La idea es no marearte: vemos si se puede hacer, acordamos precio
+            y recién ahí se imprime.
+          </p>
+        </div>
+        <div class="process-grid">
+          <article class="process-step">
+            <span>01</span>
+            <h3>Me mandás la idea</h3>
+            <p>
+              Una foto, medidas aproximadas o un audio contando qué pieza
+              necesitás. No hace falta tener un plano.
+            </p>
+          </article>
+          <article class="process-step">
+            <span>02</span>
+            <h3>Reviso si conviene imprimirla</h3>
+            <p>
+              Vemos tamaño, material, color y si la pieza va a aguantar el
+              uso. Si no tiene sentido, te lo digo antes.
+            </p>
+          </article>
+          <article class="process-step">
+            <span>03</span>
+            <h3>Imprimo y coordinamos</h3>
+            <p>
+              La pieza se imprime, se revisa y después arreglamos retiro o
+              envío. Las piezas simples suelen salir en 48-72 hs.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact-section">
+      <div class="container contact-grid">
+        <div>
+          <p class="eyebrow">Presupuesto sin compromiso</p>
+          <h2>¿Tenés una idea o un problema para resolver?</h2>
+          <p>
+            Mandame tu consulta. Puede ser una foto, una referencia o una
+            explicación corta de la pieza que necesitás.
+          </p>
+          <div class="contact-list">
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5L20 7"></path>
+              </svg>
+              Presupuestos claros antes de imprimir
+            </span>
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5L20 7"></path>
+              </svg>
+              Descuentos por pedidos múltiples
+            </span>
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m5 12 5 5L20 7"></path>
+              </svg>
+              Atención personalizada por chat o mail
+            </span>
+          </div>
+        </div>
+
+        <form id="contact-form" class="contact-form">
+          <label>
+            Nombre
+            <input type="text" name="name" placeholder="Ej: Ana" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="tu@correo.com" required />
+          </label>
+          <label>
+            Idea o problema a resolver
+            <textarea name="message" placeholder="Contanos qué te gustaría imprimir o qué problema querés resolver."
+              required></textarea>
+          </label>
+          <button id="contact-submit" class="button button-primary full-width" type="submit">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m22 2-7 20-4-9-9-4 20-7Z"></path>
+              <path d="M22 2 11 13"></path>
+            </svg>
+            <span id="contact-submit-text">Enviar consulta</span>
+          </button>
+          <span id="contact-status" class="form-status" role="status" aria-live="polite"></span>
+          <p>
+            También podés escribirnos por WhatsApp o Instagram si preferís
+            mandar fotos directamente.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <span>© <span id="current-year"></span> Eze en 3D. Impresiones 3D para tu hogar.</span>
+      <nav aria-label="Navegación de pie">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const WEB3FORMS_ACCESS_KEY = "9cd30c6e-e2b0-4636-9478-f7c610752891";
+      const currencyData = {
+        ARS: {
+          label: "ARS $",
+          locale: "es-AR",
+          rate: 1,
+          defaults: {
+            filamentKg: 24000,
+            kwh: 140,
+            spareParts: 15000,
+            supplies: 0,
+          },
+        },
+        USD: {
+          label: "USD US$",
+          locale: "en-US",
+          rate: 1200,
+        },
+        EUR: {
+          label: "EUR €",
+          locale: "de-DE",
+          rate: 1300,
+        },
+      };
+      const moneyFields = ["filamentKg", "kwh", "spareParts", "supplies"];
+      const formState = {
+        filamentKg: 24000,
+        kwh: 140,
+        watts: 120,
+        machineHours: 4300,
+        spareParts: 15000,
+        errorMargin: 30,
+        printHours: 1,
+        printMinutes: 0,
+        grams: 100,
+        supplies: 0,
+        profitMultiplier: 4,
+      };
+      let currency = "ARS";
+      let calculationCount = 0;
+
+      const toNumber = (value) => {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+      };
+
+      const convertMoneyFromARS = (value, targetCurrency) => {
+        if (value === "") return "";
+        const parsed = Number(value);
+        if (!Number.isFinite(parsed)) return "";
+        const converted = parsed / currencyData[targetCurrency].rate;
+        return targetCurrency === "ARS" ? parsed : Number(converted.toFixed(4));
+      };
+
+      const convertMoneyToARS = (value, sourceCurrency) => {
+        if (value === "") return "";
+        const parsed = Number(value);
+        if (!Number.isFinite(parsed)) return "";
+        return parsed * currencyData[sourceCurrency].rate;
+      };
+
+      const formatMoney = (value) => {
+        const config = currencyData[currency];
+        return `${config.label} ${new Intl.NumberFormat(config.locale, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(value)}`;
+      };
+
+      const calculateResults = () => {
+        const money = (field) => toNumber(formState[field]) / currencyData[currency].rate;
+        const totalHours =
+          toNumber(formState.printHours) + Math.min(toNumber(formState.printMinutes), 59) / 60;
+        const materialCost = (money("filamentKg") / 1000) * toNumber(formState.grams);
+        const electricityCost =
+          (toNumber(formState.watts) / 1000) * totalHours * money("kwh");
+        const machineWear =
+          toNumber(formState.machineHours) > 0
+            ? (money("spareParts") / toNumber(formState.machineHours)) * totalHours
+            : 0;
+        const errorMarginCost =
+          (materialCost + electricityCost + machineWear) *
+          (toNumber(formState.errorMargin) / 100);
+        const costLightAndMaterial = materialCost + electricityCost;
+        const costBeforeSupplies =
+          materialCost + electricityCost + machineWear + errorMarginCost;
+        const totalCost =
+          costBeforeSupplies + money("supplies");
+        const totalToCharge =
+          costBeforeSupplies * toNumber(formState.profitMultiplier) + money("supplies");
+
+        return {
+          materialCost,
+          electricityCost,
+          machineWear,
+          errorMarginCost,
+          supplies: money("supplies"),
+          costLightAndMaterial,
+          totalCost,
+          totalToCharge,
+        };
+      };
+
+      const renderMoneyFields = () => {
+        document.querySelectorAll("[data-money-field]").forEach((input) => {
+          const field = input.dataset.field;
+          input.value = convertMoneyFromARS(formState[field], currency);
+          input.step = currency === "ARS" ? "1" : "0.01";
+        });
+        document.querySelectorAll("[data-currency-label]").forEach((item) => {
+          item.textContent = currencyData[currency].label;
+        });
+      };
+
+      const renderCurrencyButtons = () => {
+        document.querySelectorAll("[data-currency]").forEach((button) => {
+          button.classList.toggle("active", button.dataset.currency === currency);
+        });
+      };
+
+      const renderResults = () => {
+        const results = calculateResults();
+        Object.entries(results).forEach(([key, value]) => {
+          const target = document.getElementById(`result-${key}`);
+          if (target) target.textContent = formatMoney(value);
+        });
+      };
+
+      const renderAll = () => {
+        renderMoneyFields();
+        renderCurrencyButtons();
+        renderResults();
+      };
+
+      document.querySelectorAll("[data-field]").forEach((input) => {
+        input.addEventListener("input", () => {
+          const field = input.dataset.field;
+          formState[field] = moneyFields.includes(field)
+            ? convertMoneyToARS(input.value, currency)
+            : input.value;
+          renderResults();
+        });
+      });
+
+      document.querySelectorAll("[data-currency]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const nextCurrency = button.dataset.currency;
+          if (nextCurrency === currency) return;
+          currency = nextCurrency;
+          renderAll();
+        });
+      });
+
+      document.getElementById("reset-button").addEventListener("click", () => {
+        const defaults = currencyData.ARS.defaults;
+        Object.assign(formState, {
+          filamentKg: defaults.filamentKg,
+          kwh: defaults.kwh,
+          spareParts: defaults.spareParts,
+          supplies: defaults.supplies,
+          watts: 120,
+          machineHours: 4300,
+          errorMargin: 30,
+          printHours: 1,
+          printMinutes: 0,
+          grams: 100,
+          profitMultiplier: 4,
+        });
+        document.querySelectorAll("[data-field]:not([data-money-field])").forEach((input) => {
+          input.value = formState[input.dataset.field];
+        });
+        renderAll();
+      });
+
+      document.getElementById("calculate-button").addEventListener("click", () => {
+        calculationCount += 1;
+        const resultsPanel = document.getElementById("calculator-results");
+        resultsPanel.dataset.calculations = String(calculationCount);
+        resultsPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      const menuButton = document.getElementById("menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = menuButton.querySelector(".menu-icon");
+      const closeIcon = menuButton.querySelector(".close-icon");
+
+      const setMenuOpen = (open) => {
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+        mobileMenu.hidden = !open;
+        menuIcon.hidden = open;
+        closeIcon.hidden = !open;
+      };
+
+      menuButton.addEventListener("click", () => {
+        setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuOpen(false));
+      });
+
+      const contactForm = document.getElementById("contact-form");
+      const contactStatus = document.getElementById("contact-status");
+      const contactSubmit = document.getElementById("contact-submit");
+      const contactSubmitText = document.getElementById("contact-submit-text");
+
+      contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        contactStatus.textContent = "Enviando consulta...";
+        contactSubmit.disabled = true;
+        contactSubmitText.textContent = "Enviando...";
+
+        const formData = new FormData(contactForm);
+        formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+        formData.append("subject", "Nueva consulta desde Eze en 3D");
+
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await response.json();
+
+          if (data.success) {
+            contactStatus.textContent = "Consulta enviada correctamente. Te respondemos pronto.";
+            contactForm.reset();
+          } else {
+            contactStatus.textContent = "No se pudo enviar la consulta. Probá de nuevo.";
+          }
+        } catch {
+          contactStatus.textContent = "No se pudo enviar la consulta. Revisá tu conexión.";
+        } finally {
+          contactSubmit.disabled = false;
+          contactSubmitText.textContent = "Enviar consulta";
+        }
+      });
+
+      document.getElementById("current-year").textContent = new Date().getFullYear();
+
+      if (window.location.hash) {
+        requestAnimationFrame(() => {
+          document
+            .querySelector(window.location.hash)
+            ?.scrollIntoView({ behavior: "instant", block: "start" });
+        });
+      }
+
+      renderAll();
+    })();
+  </script>
+</body>
+
 </html>
