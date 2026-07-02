@@ -674,7 +674,7 @@ function App() {
 
       <a
         className="whatsapp-float"
-        href="https://wa.me/1122762234"
+        href="https://wa.me/541122762234"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Abrir chat de WhatsApp"
