@@ -2,7 +2,8 @@
   "use strict";
 
   const WEB3FORMS_ACCESS_KEY = "9cd30c6e-e2b0-4636-9478-f7c610752891";
-  const SHOP_URL = "";
+  const SHOP_URL = "https://ezeen3d.mitiendanube.com/";
+  const SHOP_PRODUCTS_URL = "https://ezeen3d.mitiendanube.com/productos/";
   const WHATSAPP_URL =
     "https://wa.me/541122762234?text=Hola%20Eze%2C%20quiero%20pedir%20presupuesto%20para%20una%20impresi%C3%B3n%203D%20a%20pedido.";
 
@@ -175,8 +176,11 @@
     const shopButtons = [...document.querySelectorAll("a")].filter((link) =>
       link.textContent.toLowerCase().includes("tienda")
     );
+    const productButtons = [...document.querySelectorAll("a")].filter((link) =>
+      link.textContent.toLowerCase().includes("productos listos para comprar")
+    );
 
-    shopButtons.forEach((link) => {
+    [...shopButtons, ...productButtons].forEach((link) => {
       link.addEventListener("click", () => {
         trackConversion("online_shop_click", {
           location: getLinkLocation(link),
@@ -184,7 +188,11 @@
       });
     });
 
-    if (!SHOP_URL) return;
+    productButtons.forEach((link) => {
+      link.href = SHOP_PRODUCTS_URL;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
 
     document.querySelectorAll('a[href="' + WHATSAPP_URL + '"]').forEach((link) => {
       if (!link.textContent.toLowerCase().includes("tienda")) return;
