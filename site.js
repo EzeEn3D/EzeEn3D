@@ -22,9 +22,9 @@
       locale: "es-AR",
       rate: 1,
       defaults: {
-        filamentKg: 24000,
+        filamentKg: 25000,
         kwh: 140,
-        spareParts: 15000,
+        spareParts: 150000,
         supplies: 0,
       },
     },
@@ -33,9 +33,9 @@
       locale: "en-US",
       rate: 1200,
       defaults: {
-        filamentKg: 20,
+        filamentKg: 20.83,
         kwh: 0.12,
-        spareParts: 12.5,
+        spareParts: 125,
         supplies: 0,
       },
     },
@@ -44,9 +44,9 @@
       locale: "de-DE",
       rate: 1300,
       defaults: {
-        filamentKg: 18.46,
+        filamentKg: 19.23,
         kwh: 0.11,
-        spareParts: 11.54,
+        spareParts: 115.38,
         supplies: 0,
       },
     },
@@ -74,17 +74,17 @@
   };
 
   const baseForm = {
-    filamentKg: 24000,
+    filamentKg: 25000,
     kwh: 140,
     watts: 120,
     machineHours: 4300,
-    spareParts: 15000,
-    errorMargin: 30,
+    spareParts: 150000,
+    errorMargin: 5,
     printHours: 1,
     printMinutes: 0,
     grams: 100,
     supplies: 0,
-    profitMultiplier: 4,
+    profitMultiplier: 3,
   };
 
   const menuIcon =
