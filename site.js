@@ -5,7 +5,7 @@
   const SHOP_URL = "https://ezeen3d.mitiendanube.com/";
   const SHOP_PRODUCTS_URL = "https://ezeen3d.mitiendanube.com/productos/";
   const WHATSAPP_URL =
-    "https://wa.me/541122762234?text=Hola%20Eze%2C%20quiero%20pedir%20presupuesto%20para%20una%20impresi%C3%B3n%203D%20a%20pedido.";
+    "https://wa.me/5491176445565?text=Hola%20Eze%2C%20quiero%20pedir%20presupuesto%20para%20una%20impresi%C3%B3n%203D%20a%20pedido.";
 
   const primaryNavItems = [
     ["Inicio", "/"],
