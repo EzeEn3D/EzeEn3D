@@ -94,6 +94,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     initMobileMenu();
+    initPolicyLink();
     initTracking();
     initShopLinks();
     initCalculator();
@@ -150,6 +151,18 @@
       button.innerHTML = open ? closeIcon : menuIcon;
       menu.hidden = !open;
     }
+  }
+
+  function initPolicyLink() {
+    if (normalizePath(window.location.pathname) !== "/") return;
+
+    const footerNav = document.querySelector(".site-footer nav");
+    if (!footerNav) return;
+
+    const link = document.createElement("a");
+    link.href = "/politicas-de-impresion-3d";
+    link.textContent = "Políticas de impresión 3D";
+    footerNav.append(link);
   }
 
   function initTracking() {
