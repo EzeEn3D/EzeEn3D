@@ -115,12 +115,10 @@
       menu.setAttribute("aria-label", "Menú móvil");
       menu.hidden = true;
 
-      const items = [...primaryNavItems, ["Calculadora", "/calculadora", true]];
-      for (const [label, href, secondary] of items) {
+      for (const [label, href] of primaryNavItems) {
         const link = document.createElement("a");
         link.href = href;
         link.textContent = label;
-        if (secondary) link.className = "mobile-secondary-link";
         if (normalizePath(window.location.pathname) === href) {
           link.classList.add("active");
         }
