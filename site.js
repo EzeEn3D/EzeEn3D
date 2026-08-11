@@ -9,11 +9,11 @@
 
   const primaryNavItems = [
     ["Inicio", "/"],
-    ["Impresión 3D a pedido", "/impresion-3d-a-pedido"],
-    ["Repuestos", "/repuestos-impresos-3d"],
-    ["Personalizados", "/productos-personalizados"],
-    ["Tienda", "/tienda"],
-    ["Contacto", "/contacto"],
+    ["Impresión 3D a pedido", "/impresion-3d-a-pedido/"],
+    ["Repuestos", "/repuestos-impresos-3d/"],
+    ["Personalizados", "/productos-personalizados/"],
+    ["Tienda", "/tienda/"],
+    ["Contacto", "/contacto/"],
   ];
 
   const currencyData = {
@@ -119,7 +119,7 @@
         const link = document.createElement("a");
         link.href = href;
         link.textContent = label;
-        if (normalizePath(window.location.pathname) === href) {
+        if (normalizePath(window.location.pathname) === normalizePath(href)) {
           link.classList.add("active");
         }
         link.addEventListener("click", () => setMenuOpen(false));
@@ -158,7 +158,7 @@
     if (!footerNav) return;
 
     const link = document.createElement("a");
-    link.href = "/politicas-de-impresion-3d";
+    link.href = "/politicas-de-impresion-3d/";
     link.textContent = "Políticas de impresión 3D";
     footerNav.append(link);
   }
